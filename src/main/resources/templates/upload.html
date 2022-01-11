@@ -1,25 +1,39 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
+    <link rel="stylesheet" type="text/css" href="css/sample.css" th:href="@{/css/sample.css}" />
 </head>
 <body>
 <div class="header">LETSBIM简单示例</div>
 <div class="tips">第一步：调用服务端API上传文件，并发起转换</div>
-<form action="/uploadFile" method="post" enctype="multipart/form-data">
-    <p><input type="file" name="file"></p>
-    <p><input type="submit" value="上传"></p>
-</form>
+<div class="box">
 
+    <div class="upload-file">
+        <form action="/uploadFile" method="post" enctype="multipart/form-data">
+            <p><input type="file" name="file"></p>
+            <p><input type="submit" value="上传"></p>
+            <div class="upload-desc">
+                格式： rvt, rfa, ifc, dw",dxf,fbx, obj,gltf,glb,zip<br/>
+                大小：1G
+            </div>
+        </form>
+<!--        <div class="upload-button" id="pickfiles">选择文件</div>-->
 
-<!--<form action="../upload" method="post" enctype="multipart/form-data">-->
-<!--    <input type="file" name="file" accept="image/*">-->
-<!--    <br>-->
-<!--    <input type="submit" value="上传" class="btn btn-success">-->
-<!--</form>-->
-<!--[[${filename}]]-->
-<!--<br>-->
-<!--<img th:src="@{${filename}}" alt="图片">-->
+    </div>
+
+    <div class="result hide" id="wait-box">
+        <img src="<%=request.getContextPath() %>/static/images/timg.gif"><br />
+        正在转换，请稍等...
+    </div>
+
+    <div class="result hide" id="translate-error-box">
+        <img src="<%=request.getContextPath() %>/static/images/error.jpg"><br />
+        转换失败，请<a href="<%=request.getContextPath() %>/upload">重新上传</a>
+    </div>
+
+</div>
+
 </body>
 </html>

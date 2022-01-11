@@ -44,7 +44,7 @@ public class FileController {
     @PostMapping("/uploadFile")
     public String uploadFile(@RequestParam("file") MultipartFile file, Model model){
         if (file.isEmpty()) {
-            return "error";//是到error.html页面
+            return "view1";//是到error.html页面
         }
         fileService.upload(file);
 

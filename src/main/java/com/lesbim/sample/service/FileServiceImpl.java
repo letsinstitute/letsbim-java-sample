@@ -1,7 +1,12 @@
 package com.lesbim.sample.service;
 
+import com.lets.bim.sdk.client.LetsBimClient;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
+
+import java.io.IOException;
+
 
 /**
  * @author lichunlan
@@ -10,10 +15,24 @@ import org.springframework.web.multipart.MultipartFile;
  */
 @Service
 public class FileServiceImpl implements IFileService {
-    //todo 注解加入sdk的client
+    @Value(value = "${letsbim.sdk.endPoint}")
+    private String endPoint;
+
+    @Value(value = "${letsim.sdk.appKey}")
+    private String appKey;
+
+    @Value(value = "${letsbim.sdk.appSecret}")
+    private String appSecret;
+
     @Override
-    public void upload(MultipartFile file) {
+    public void upload(MultipartFile file){
+        LetsBimClient letsBimClient = new LetsBimClient(endPoint,appKey,appSecret);
         //todo 第一步 调用服务端API上传文件接口
+        try {
+            letsBimClient.upload(file.getInputStream(),file.getOriginalFilename());
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
         //todo 第二步 发起转换接口
     }
 

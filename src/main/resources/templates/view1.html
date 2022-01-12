@@ -57,6 +57,7 @@
 <script type="text/javascript">
     const { BimViewer, PicturePlugin, NavCubePlugin } = letsBIM;
     var viewer;
+    var viewToken = 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJKV1QuU0VSVkVSIiwiYXVkIjoiSldULkNMSUVOVCIsInN1YiI6IntcInN1YmplY3RcIjpcIjE0NjU1ODgzOTc2MTg3NTM1MzhcIixcInVzZXJLZXlcIjpcIjE0NDY2NTU5ODg3NDY4NzQ4ODFcIn0iLCJqdGkiOiIzZDIyYTM3MC0xNmNhLTRkODUtOGVkNi1lZThlZDhhODBjNGYiLCJuYmYiOjE2NDA4MjY3OTksImlhdCI6MTY0MDgyNjk3OSwiZXhwIjozNzg4MzEwNjI2fQ.dC-5JCeTu2T4DFao0qO2gJ7IN0cuSDqDpL1ZYU3svIw';
 
     const onModelLoaded = viewer => {
         // 添加方向指示器
@@ -66,7 +67,7 @@
     function loadBIM() {
         var dom = document.getElementById('containerDiv')
         viewer = new BimViewer(dom, false)
-        viewer.load('eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJKV1QuU0VSVkVSIiwiYXVkIjoiSldULkNMSUVOVCIsInN1YiI6IntcInN1YmplY3RcIjpcIjE0NjU1ODgzOTc2MTg3NTM1MzhcIixcInVzZXJLZXlcIjpcIjE0NDY2NTU5ODg3NDY4NzQ4ODFcIn0iLCJqdGkiOiIzZDIyYTM3MC0xNmNhLTRkODUtOGVkNi1lZThlZDhhODBjNGYiLCJuYmYiOjE2NDA4MjY3OTksImlhdCI6MTY0MDgyNjk3OSwiZXhwIjozNzg4MzEwNjI2fQ.dC-5JCeTu2T4DFao0qO2gJ7IN0cuSDqDpL1ZYU3svIw')
+        viewer.load(viewToken)
         viewer.on('progress', data => {
             const progress = Math.floor((data.loaded / data.total) * 100)
             var message = 'progress ->模型下载进度：' + progress

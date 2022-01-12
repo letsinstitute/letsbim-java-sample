@@ -31,10 +31,13 @@
             <artifactId>spring-boot-starter-test</artifactId>
             <scope>test</scope>
         </dependency>
+
         <dependency>
             <groupId>com.lets.bim</groupId>
-            <artifactId>cloud-parent</artifactId>
+            <artifactId>cloud-letsbim-sdk</artifactId>
             <version>1.0.1</version>
+            <scope>system</scope>
+            <systemPath>${project.basedir}/lib/cloud-letsbim-sdk-1.0.1.jar</systemPath>
         </dependency>
     </dependencies>
 

@@ -1,12 +1,99 @@
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
         "http://www.w3.org/TR/html4/loose.dtd">
-<html xmlns:th="http://www.w3.org/1999/xhtml">
+<html style="height:100%" xmlns:th="http://www.w3.org/1999/xhtml">
 <head>
-    <title>Title</title>
-    <link rel="stylesheet" type="text/css" href="css/sample.css" th:href="@{/css/sample.css}" />
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <title>加载模型</title>
+    <!--正式环境-->
+<!--    <link rel="stylesheet" type="text/css" href="https://jssdk.letsbim.cn/bim.ui.css">-->
+<!--    <script src="https://jssdk.letsbim.cn/bim.viewer.js"></script>-->
+    <!--开发环境-->
+    <link rel="stylesheet" type="text/css" href="http://192.168.250.200/jssdk/bim.ui.css">
+    <script src="http://192.168.250.200/jssdk/bim.viewer.js"></script>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+
+        html,
+        body {
+            height: 100%;
+        }
+
+        .buttons {
+            font-size: 0;
+            height: 40px;
+            display: flex;
+        }
+
+        .mainApp {
+            display: flex;
+            flex-direction: column;
+            overflow: hidden;
+            height: 100%;
+        }
+
+        .button {
+            margin: 5px 0 5px 5px;
+            padding: 5px;
+            border-radius: 3px;
+            border: none;
+            background: rgba(1, 167, 235, 1);
+            color: #FFFFFF;
+        }
+
+        #containerDiv {
+            height: calc(100% - 40px);
+            /* width: 100%;
+            height: 100%;
+            flex: 1; */
+        }
+    </style>
 </head>
+
 <body>
-<div class="header">LETSBIM简单示例</div>
-<div class="tips">第二步：调用服务端API获取ViewToken，并对接JS显示组件打开模型</div>
+<div class='mainApp'>
+    <div class='buttons'>
+    </div>
+
+    <div id="containerDiv"></div>
+</div>
+<script th:inline="javascript" >
+    const { BimViewer, PicturePlugin, NavCubePlugin } = letsBIM;
+    var viewer;
+    //从接口获取到的viewToken
+    var viewToken = [[${viewToken}]];
+    console.log(viewToken);
+    const onModelLoaded = viewer => {
+        // 添加方向指示器
+        viewer.isDirty();
+    }
+
+    function loadBIM() {
+        var dom = document.getElementById('containerDiv')
+        viewer = new BimViewer(dom, false)
+        viewer.load(viewToken)
+        viewer.on('progress', data => {
+            const progress = Math.floor((data.loaded / data.total) * 100)
+            var message = 'progress ->模型下载进度：' + progress
+            console.info(message)
+        })
+        viewer.on('loaded', model => {
+            this.loading = false
+            console.info("loaded ->模型加载完毕");
+            // do others
+            onModelLoaded(viewer)
+        })
+
+        viewer.on('error', event => {
+            console.info(event)
+        })
+    }
+
+    loadBIM();
+
+</script>
 </body>
+
 </html>

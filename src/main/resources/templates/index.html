@@ -4,14 +4,14 @@
 <head>
     <meta charset="UTF-8">
     <title>sample</title>
-    <link rel="stylesheet" type="text/css" href="css/sample.css" th:href="@{/css/sample.css}" />
+<!--    <link rel="stylesheet" type="text/css" href="css/sample.css" th:href="@{/css/sample.css}" />-->
 </head>
 <body>
 <div class="header">LETSBIM简单示例</div>
 <div class="box">
     <form role="form" action = "/login" method="post">
-        账号：<input type="text" id="name" name = "name"> <br>
-        密码：<input type="password" id = "password" name = "password"> <br>
+        账号：<input type="text" id="name" name = "name" defaultVal="letsbim"> <br>
+        密码：<input type="password" id = "password" name = "password"  defaultVal="letsbim"> <br>
         <input type="submit" id = "login" value = "login">
     </form>
 </div>

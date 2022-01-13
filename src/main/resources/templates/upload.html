@@ -3,14 +3,15 @@
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
-    <link rel="stylesheet" type="text/css" href="css/sample.css" th:href="@{/css/sample.css}" />
+<!--    <link rel="stylesheet" type="text/css" href="css/sample.css" th:href="@{/css/sample.css}" />-->
+<!--    <script th:src="@{/js/jquery.js}"></script>-->
 </head>
 <body>
 <div class="header">LETSBIM简单示例</div>
-<div class="tips">第一步：调用服务端API上传文件，并发起转换</div>
+<div class="tips">第一步：上传文件</div>
 <div class="box">
 
-    <div class="upload-file">
+    <div class="upload-file" th:if="!${fileId}">
         <form action="/uploadFile" method="post" enctype="multipart/form-data">
             <p><input type="file" name="file"></p>
             <p><input type="submit" value="上传"></p>
@@ -19,19 +20,33 @@
                 大小：1G
             </div>
         </form>
-<!--        <div class="upload-button" id="pickfiles">选择文件</div>-->
 
+        <p th:text="${fileId}"></p>
     </div>
 
-    <div class="result hide" id="wait-box">
-        <img src="<%=request.getContextPath() %>/static/images/timg.gif"><br />
-        正在转换，请稍等...
+
+
+    <div class="box" >
+        <div class="tips">第二步：根据文件ID发起转换</div>
+        <div class="translate-file">
+            <a th:href="@{/translateFile(fileId=${fileId})}">转换文件</a>
+            <p th:text="${translateResult}"></p>
+
+
+            <a th:href="@{/getFileState(fileId=${fileId})}">获取文件状态</a>
+            <p th:text="${fileState}"></p>
+        </div>
     </div>
 
-    <div class="result hide" id="translate-error-box">
-        <img src="<%=request.getContextPath() %>/static/images/error.jpg"><br />
-        转换失败，请<a href="<%=request.getContextPath() %>/upload">重新上传</a>
+
+
+
+
+    <div class="tips">第三步：获取ViewToken，并对接JS显示组件打开模型</div>
+    <div class="translate-file">
+        <a th:href="@{/getFileViewToken(fileId=${fileId})}">模型展示</a>
     </div>
+
 
 </div>
 

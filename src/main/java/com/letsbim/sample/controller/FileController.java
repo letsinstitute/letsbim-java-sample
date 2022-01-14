@@ -20,13 +20,12 @@ public class FileController {
      * 第一步：上传文件
      */
     @PostMapping("/uploadFile")
-    public String uploadFile(@RequestParam("file") MultipartFile file,String fileName, Model model){
+    public String uploadFile(@RequestParam("file") MultipartFile file,@RequestParam(value = "folderId",required = false)Long folderId, Model model){
         if (file.isEmpty()) {
             return "upload";
         }
-        Long fileId = fileService.upload(file);
+        Long fileId = fileService.upload(file,folderId);
         model.addAttribute("fileId", fileId);
-//        model.addAttribute("fileName", file.getOriginalFilename());
         return "upload";
     }
 
@@ -38,7 +37,7 @@ public class FileController {
     @GetMapping("/translateFile")
     public String translateFile(@RequestParam("fileId")Long fileId, Model model){
         boolean result = fileService.translateFile(fileId);
-        model.addAttribute("translateResult", result ? "转换成功":"转换失败");
+        model.addAttribute("translateResult", result ? "转换中,请等待...":"转换失败");
         model.addAttribute("fileId", fileId);
         return "upload";
     }

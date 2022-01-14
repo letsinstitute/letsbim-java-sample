@@ -7,7 +7,7 @@ public interface IFileService {
      * 上传文件
      * @param file
      */
-    Long upload(MultipartFile file);
+    Long upload(MultipartFile file,Long folderId);
 
     /**
      * 获取文件的状态
@@ -25,7 +25,7 @@ public interface IFileService {
     /**
      * 转换文件
      * @param fileId
-     * @return true:转成成功  false：转换失败
+     * @return true:操作成功  false：操作失败
      */
     boolean translateFile(Long fileId);
 }

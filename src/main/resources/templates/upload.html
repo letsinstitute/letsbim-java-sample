@@ -8,20 +8,33 @@
 </head>
 <body>
 <H1>LETSBIM简单示例</H1>
-<H3>第一步：上传文件（文件夹名称可填可不填写）</H3>
-<div class="container">
 
-<!--    th:if="!${fileId}"-->
+
+<div class="box" >
+    <H3>新建文件夹（可以不用）</H3>
+    <form class="translate-file"   th:action="@{/addFolder}"  method="post">
+        <input type="text" class="form-control" name="folderName"  id="folderName" placeholder="请输入文件夹名称"/>
+        <input type="submit" value="新建文件夹" />
+        <h4>新建的文件夹的folderId是：</h4><a th:text="${folderId}"></a>
+    </form>
+</div>
+
+<br/><br/>
+
+<H3>第一步：上传文件（文件夹Id可填可不填写）</H3>
+<div class="container">
     <div class="upload-file">
         <form action="/uploadFile" method="post" enctype="multipart/form-data">
             <p><input type="file" name="file"></p>
             <p><input type="submit" value="上传"></p>
+            <input type="text" name="folderId"  id="folderId" placeholder="请输入上面的folerId(非必填)"/>
             <div class="upload-desc">
                 注意：请上传rvt、rfa、ifc、dwg、dxf、fbx、obj、gltf、glb、dgn或zip格式的资料  大小：50M
             </div>
+            <h4>上传文件Id是：</h4><a th:text="${fileId}"></a>
         </form>
     </div>
-    <br/><br/><br/>
+    <br/><br/>
 
 
     <div class="box" >
@@ -33,11 +46,11 @@
 
     </div>
 
-    <br/><br/><br/>
+    <br/><br/>
 
 
     <div class="box" >
-        <H3>第三步：根据文件ID获取转换文件状态（此步骤可以不要，如果第二步已经转换成功，则可以直接调到第四步进行模型展示）</H3>
+        <H3>第三步：根据文件ID获取转换文件状态</H3>
         <div class="translate-file">
             <a th:href="@{/getFileState(fileId=${fileId})}">获取文件状态</a>
             <h4>文件转换状态是：</h4><p th:text="${fileState}"></p>
@@ -45,7 +58,7 @@
 
     </div>
 
-    <br/><br/><br/>
+    <br/><br/>
 
     <H3>第四步：获取ViewToken，打开模型</H3>
     <div class="translate-file">

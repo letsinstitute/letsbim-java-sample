@@ -4,7 +4,6 @@ import com.lets.bim.sdk.client.LetsBimClient;
 import com.lets.bim.sdk.entity.Result;
 import com.lets.bim.sdk.entity.TranslateInfo;
 import com.lets.bim.sdk.entity.TranslateResult;
-import io.swagger.annotations.ApiModelProperty;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
@@ -30,14 +29,19 @@ public class FileServiceImpl implements IFileService {
     private LetsBimClient letsBimClient = null;
 
     @Override
-    public Long upload(MultipartFile file){
+    public Long upload(MultipartFile file,Long folderId){
         if(null == letsBimClient){
             letsBimClient = new LetsBimClient(endPoint,appKey,appSecret);
         }
         //第一步 调用服务端API上传文件接口
         Long fileId = null;
         try {
-            Result<Long> result = letsBimClient.upload(file.getInputStream(), file.getOriginalFilename());
+            Result<Long> result = null;
+            if(null == folderId){
+                result = letsBimClient.upload(file.getInputStream(), file.getOriginalFilename());
+            }else{
+                result = letsBimClient.upload(file.getInputStream(),file.getOriginalFilename(),folderId);
+            }
             if(null != result.getResult()){
                 fileId = result.getResult().longValue();
             }

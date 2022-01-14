@@ -1,16 +1,10 @@
-body {margin: 0;padding: 0;background: #2c2c2c;height: 100%;}
-.header {margin:o auto; padding:100px 0 20px 0; text-align:center; color: #F0F0F0; font-size:24px}
-.tips {padding:20px 0; text-align:center; color: #F0F0F0; font-size:16px}
-.box {margin:0 auto;height:500px; width:900px;background:#FFF;}
 
-
-a{color:#0080ff; text-decoration:none}
-a:hover{color:#ff8000; text-decoration:none}
-
-.viewer{height:500px; width:900px;}
-.hide {display:none}
-.upload-file {padding: 120px 0 0 0;}
-.upload-button {margin: 0 auto;	width: 120px;padding: 15px 0;text-align: center;font-size: 16px;color: #fff;background: #11DAB7;border-radius: 5px;cursor:pointer;}
-.upload-button:hover {color: #fff;background: #008080;}
-.upload-desc {padding: 15px 0;text-align: center;color:#999;}
-.result {padding: 40px 0 0 0;text-align: center;}
+.container {
+    padding-right: 15px;
+    padding-left: 15px;
+    margin-right: auto;
+    margin-left: auto;
+}
+.form-group {
+    margin-bottom: 15px;
+}

@@ -37,7 +37,8 @@
             <artifactId>cloud-letsbim-sdk</artifactId>
             <version>1.0.1</version>
             <scope>system</scope>
-            <systemPath>${project.basedir}/lib/cloud-letsbim-sdk-1.0.1-.jar</systemPath>
+            <systemPath>${project.basedir}/lib/cloud-letsbim-sdk-1.0.1.jar</systemPath>
+
         </dependency>
     </dependencies>
 

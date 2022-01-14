@@ -4,6 +4,7 @@ import com.lets.bim.sdk.client.LetsBimClient;
 import com.lets.bim.sdk.entity.Result;
 import com.lets.bim.sdk.entity.TranslateInfo;
 import com.lets.bim.sdk.entity.TranslateResult;
+import io.swagger.annotations.ApiModelProperty;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
@@ -33,7 +34,7 @@ public class FileServiceImpl implements IFileService {
         if(null == letsBimClient){
             letsBimClient = new LetsBimClient(endPoint,appKey,appSecret);
         }
-        //todo 第一步 调用服务端API上传文件接口
+        //第一步 调用服务端API上传文件接口
         Long fileId = null;
         try {
             Result<Long> result = letsBimClient.upload(file.getInputStream(), file.getOriginalFilename());
@@ -51,13 +52,36 @@ public class FileServiceImpl implements IFileService {
         if(null == letsBimClient){
             letsBimClient = new LetsBimClient(endPoint,appKey,appSecret);
         }
-      //todo  调用SDK获取文件转换状态
+       //调用SDK获取文件转换状态
         Result<TranslateResult> translateResult = letsBimClient.getTranslateResult(fileId);
         String result  = null;
-//        status":3
         if(null != translateResult.getResult()){
             Integer status = translateResult.getResult().getStatus();
-            result = "转换中";
+            switch (status){
+                case 0  :
+                    result = "上传完成";
+                    break;
+                case 1  :
+                    result = "未转换";
+                    break;
+                case 2 :
+                    result = "转换中";
+                    break;
+                case 3  :
+                    result = "转换完成";
+                    break;
+                case 4  :
+                    result = "转换失败";
+                    break;
+                case 5  :
+                    result = "等待转化";
+                    break;
+                case 6  :
+                    result = "取消转换";
+                    break;
+            }
+        }else{
+            result = translateResult.getMessage();
         }
         return  result;
     }

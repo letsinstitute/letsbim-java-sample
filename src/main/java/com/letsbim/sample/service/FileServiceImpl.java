@@ -29,27 +29,23 @@ public class FileServiceImpl implements IFileService {
     private LetsBimClient letsBimClient = null;
 
     @Override
-    public Long upload(MultipartFile file,Long folderId){
+    public Result<Long> upload(MultipartFile file,Long folderId){
         if(null == letsBimClient){
             letsBimClient = new LetsBimClient(endPoint,appKey,appSecret);
         }
         //第一步 调用服务端API上传文件接口
-        Long fileId = null;
+        Result<Long> result = null;
         try {
-            Result<Long> result = null;
             if(null == folderId){
                 result = letsBimClient.upload(file.getInputStream(), file.getOriginalFilename());
             }else{
                 result = letsBimClient.upload(file.getInputStream(),file.getOriginalFilename(),folderId);
             }
-            if(null != result.getResult()){
-                fileId = result.getResult().longValue();
-            }
         } catch (IOException e) {
             e.printStackTrace();
             System.out.print(e.getMessage());
         }
-        return fileId;
+        return result;
     }
 
     @Override

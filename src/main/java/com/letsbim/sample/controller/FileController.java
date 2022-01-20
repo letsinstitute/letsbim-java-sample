@@ -25,8 +25,13 @@ public class FileController {
         if (file.isEmpty()) {
             return "upload";
         }
-        Long fileId = fileService.upload(file,folderId);
-        model.addAttribute("fileId", fileId);
+        Result<Long> uploadResult = fileService.upload(file, folderId);
+        if(null != uploadResult.getResult()){
+            model.addAttribute("fileId",  uploadResult.getResult().longValue());
+        }else{
+            model.addAttribute("exceptionMessage",  uploadResult.getMessage());
+        }
+
         return "upload";
     }
 

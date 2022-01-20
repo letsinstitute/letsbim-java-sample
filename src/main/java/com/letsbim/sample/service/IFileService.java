@@ -8,7 +8,7 @@ public interface IFileService {
      * 上传文件
      * @param file
      */
-    Long upload(MultipartFile file,Long folderId);
+    Result<Long> upload(MultipartFile file,Long folderId);
 
     /**
      * 获取文件的状态

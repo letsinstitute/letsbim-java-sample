@@ -1,5 +1,6 @@
 package com.letsbim.sample.service;
 
+import com.lets.bim.sdk.entity.Result;
 import org.springframework.web.multipart.MultipartFile;
 
 public interface IFileService {
@@ -25,7 +26,7 @@ public interface IFileService {
     /**
      * 转换文件
      * @param fileId
-     * @return true:操作成功  false：操作失败
+     * @return 转换结果
      */
-    boolean translateFile(Long fileId);
+    Result<Boolean> translateFile(Long fileId);
 }

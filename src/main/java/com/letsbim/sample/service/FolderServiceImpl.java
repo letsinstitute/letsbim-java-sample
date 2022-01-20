@@ -37,21 +37,18 @@ public class FolderServiceImpl implements IFolderService{
     }
 
     @Override
-    public Long addFolder(String folderName, Long parentId) {
+    public Result<Long> addFolder(String folderName, Long parentId) {
         if(null == letsBimClient){
             letsBimClient = new LetsBimClient(endPoint,appKey,appSecret);
         }
         Result<Long> folderResult;
-        Long folderId = null;
         if(null == parentId){
             folderResult = letsBimClient.createFolder(folderName);
         }else{
             folderResult =  letsBimClient.createFolder(folderName,parentId);
         }
-        if(null != folderResult.getResult()){
-           folderId = folderResult.getResult();
-        }
-        return folderId;
+        return folderResult;
+
     }
 
     @Override

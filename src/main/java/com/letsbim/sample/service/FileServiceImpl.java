@@ -47,6 +47,7 @@ public class FileServiceImpl implements IFileService {
             }
         } catch (IOException e) {
             e.printStackTrace();
+            System.out.print(e.getMessage());
         }
         return fileId;
     }
@@ -103,16 +104,13 @@ public class FileServiceImpl implements IFileService {
     }
 
     @Override
-    public boolean translateFile(Long fileId) {
+    public  Result<Boolean> translateFile(Long fileId) {
         if(null == letsBimClient){
             letsBimClient = new LetsBimClient(endPoint,appKey,appSecret);
         }
         TranslateInfo translateInfo = new TranslateInfo();
         translateInfo.setFileId(fileId);
         Result<Boolean> result = letsBimClient.translate(translateInfo);
-        if(null != result.getResult()){
-           return  result.getResult().booleanValue();
-        }
-        return false;
+        return  result;
     }
 }

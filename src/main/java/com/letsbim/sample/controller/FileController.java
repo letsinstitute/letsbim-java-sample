@@ -1,5 +1,6 @@
 package com.letsbim.sample.controller;
 
+import com.lets.bim.sdk.entity.Result;
 import com.letsbim.sample.service.IFileService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -20,7 +21,7 @@ public class FileController {
      * 第一步：上传文件
      */
     @PostMapping("/uploadFile")
-    public String uploadFile(@RequestParam("file") MultipartFile file,@RequestParam(value = "folderId",required = false)Long folderId, Model model){
+    public String uploadFile(@RequestParam("file") MultipartFile file,Long folderId, Model model){
         if (file.isEmpty()) {
             return "upload";
         }
@@ -35,9 +36,15 @@ public class FileController {
      * @return
      */
     @GetMapping("/translateFile")
-    public String translateFile(@RequestParam("fileId")Long fileId, Model model){
-        boolean result = fileService.translateFile(fileId);
-        model.addAttribute("translateResult", result ? "转换中,请等待...":"转换失败");
+    public String translateFile(Long fileId, Model model){
+        Result<Boolean> translateFileResult = fileService.translateFile(fileId);
+        String showResult = null;
+        if(null != translateFileResult.getResult()){
+            showResult = "操作成功";
+        }else{
+            showResult = translateFileResult.getMessage();
+        }
+        model.addAttribute("translateResult", showResult);
         model.addAttribute("fileId", fileId);
         return "upload";
     }
@@ -46,10 +53,10 @@ public class FileController {
      * @return
      */
     @GetMapping("/getFileState")
-    public String getFileState(@RequestParam("fileId")Long fileId,Model model){
+    public String getFileState(Long fileId,Model model){
         String fileState = fileService.getFileState(fileId);
         model.addAttribute("fileState", fileState);
-        model.addAttribute("translateResult", fileState);
+        model.addAttribute("translateResult", "操作成功");
         model.addAttribute("fileId", fileId);
         return "upload";
     }
@@ -59,7 +66,7 @@ public class FileController {
      * @return
      */
     @GetMapping("/getFileViewToken")
-    public String getFileViewToken(@RequestParam("fileId")Long fileId, Model model){
+    public String getFileViewToken(Long fileId, Model model){
         String fileViewToken = fileService.getFileViewToken(fileId);
         model.addAttribute("viewToken", fileViewToken);
         model.addAttribute("fileId", fileId);

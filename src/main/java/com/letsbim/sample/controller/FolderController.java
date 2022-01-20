@@ -1,6 +1,7 @@
 package com.letsbim.sample.controller;
 
 import com.lets.bim.sdk.entity.Folder;
+import com.lets.bim.sdk.entity.Result;
 import com.letsbim.sample.service.IFolderService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -32,8 +33,13 @@ public class FolderController {
 
     @PostMapping("/addFolder")
     public String addFolder(Model model,String folderName){
-        Long folderId = folderService.addFolder(folderName, null);
-        model.addAttribute("folderId",folderId);
+        Result<Long> result = folderService.addFolder(folderName, null);
+        if(null != result.getResult()){
+            model.addAttribute("folderId",result.getResult());
+        }else{
+            model.addAttribute("folderNameIsNull",result.getMessage());
+        }
+
         return "upload";
     }
 }

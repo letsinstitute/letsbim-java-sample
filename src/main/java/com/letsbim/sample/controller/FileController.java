@@ -61,7 +61,7 @@ public class FileController {
     public String getFileState(Long fileId,Model model){
         String fileState = fileService.getFileState(fileId);
         model.addAttribute("fileState", fileState);
-        model.addAttribute("translateResult", "操作成功");
+//        model.addAttribute("translateResult", "操作成功");
         model.addAttribute("fileId", fileId);
         return "upload";
     }

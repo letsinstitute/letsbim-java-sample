@@ -42,10 +42,7 @@ letsbim.sdk.appSecret=X0&gjf@08#uT4jrz4BpnjU$kq9MUct0HkEg5
 http://localhost:8080/
 ```
 
-### 5、登录页的用户名密码随机输入，没经过校验
-
-
-# 联系我们  
+### 5、登录页的用户名密码随机输入，没经过校验  
 
 如有任何疑问请加入LetsBIM轻量化引擎技术交流QQ群784619842
 我们有专业的团队为您解惑

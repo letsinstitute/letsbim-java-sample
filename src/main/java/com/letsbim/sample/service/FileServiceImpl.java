@@ -1,7 +1,7 @@
 package com.letsbim.sample.service;
 
 import com.lets.bim.sdk.client.LetsBimClient;
-import com.lets.bim.sdk.entity.Result;
+import com.lets.bim.sdk.client.Result;
 import com.lets.bim.sdk.entity.TranslateInfo;
 import com.lets.bim.sdk.entity.TranslateResult;
 import org.springframework.beans.factory.annotation.Value;
@@ -37,9 +37,9 @@ public class FileServiceImpl implements IFileService {
         Result<Long> result = null;
         try {
             if(null == folderId){
-                result = letsBimClient.upload(file.getInputStream(), file.getOriginalFilename());
-            }else{
-                result = letsBimClient.upload(file.getInputStream(),file.getOriginalFilename(),folderId);
+                result = letsBimClient.upload(file.getInputStream(), file.getSize(), file.getOriginalFilename());
+            } else {
+                result = letsBimClient.upload(file.getInputStream(), file.getSize(), file.getOriginalFilename(), folderId);
             }
         } catch (IOException e) {
             e.printStackTrace();

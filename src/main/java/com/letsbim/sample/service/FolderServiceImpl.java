@@ -1,8 +1,8 @@
 package com.letsbim.sample.service;
 
 import com.lets.bim.sdk.client.LetsBimClient;
+import com.lets.bim.sdk.client.Result;
 import com.lets.bim.sdk.entity.Folder;
-import com.lets.bim.sdk.entity.Result;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 

@@ -1,6 +1,6 @@
 package com.letsbim.sample.service;
 
-import com.lets.bim.sdk.entity.Result;
+import com.lets.bim.sdk.client.Result;
 import org.springframework.web.multipart.MultipartFile;
 
 public interface IFileService {

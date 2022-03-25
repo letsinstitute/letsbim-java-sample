@@ -1,7 +1,7 @@
 package com.letsbim.sample.service;
 
+import com.lets.bim.sdk.client.Result;
 import com.lets.bim.sdk.entity.Folder;
-import com.lets.bim.sdk.entity.Result;
 
 import java.util.List;
 
@@ -21,7 +21,7 @@ public interface IFolderService {
      * @param folderName
      * @param parentId
      */
-    Result<Long>  addFolder(String folderName,Long parentId);
+    Result<Long> addFolder(String folderName, Long parentId);
 
     /**
      * 删除文件夹

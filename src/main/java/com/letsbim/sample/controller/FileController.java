@@ -1,6 +1,6 @@
 package com.letsbim.sample.controller;
 
-import com.lets.bim.sdk.entity.Result;
+import com.lets.bim.sdk.client.Result;
 import com.letsbim.sample.service.IFileService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;

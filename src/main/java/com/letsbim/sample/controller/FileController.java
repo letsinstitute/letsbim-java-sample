@@ -44,7 +44,7 @@ public class FileController {
     public String translateFile(Long fileId, Model model){
         Result<Boolean> translateFileResult = fileService.translateFile(fileId);
         String showResult = null;
-        if(null != translateFileResult.getResult()){
+        if(translateFileResult.success()){
             showResult = "操作成功";
         }else{
             showResult = translateFileResult.getMessage();
